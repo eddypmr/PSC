@@ -1,0 +1,24 @@
+<div class="home">
+  <div *ngIf="!socket" class="join">
+    <input type="text" [(ngModel)]="name">
+    <button (click)="join()">join</button>
+  </div>
+  <div *ngIf="socket" class="chat">
+    <div class="messages" #messagesComponent>
+      <div *ngFor="let message of messages" class="message">
+        <div class="message__avatar" [style.background-color]="getRandomColor(message.from)">
+          <img *ngIf="message.from === 'admin'" src="assets/icons/bot.svg">
+          <span *ngIf="message.from !== 'admin'" class="avatar__letter">{{ message.from[0] }}</span>
+        </div>
+        <div class="content">
+          <p class="message__from"><span>{{ message.from }}</span> {{ message.timestamp | date:'HH:mm' }}</p>
+          <span>{{ message.text }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="input" (click)="scroll()">
+      <input type="text" [(ngModel)]="text">
+      <button (click)="sendMessage()">send</button>
+    </div>
+  </div>
+</div>
