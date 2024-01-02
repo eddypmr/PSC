@@ -1,26 +1,25 @@
-# Chat
-Chat en nodejs usando comunicación por websockets
-
-- Instalar dependencias
+# Lunch
+1. Lanzar zookeeper
 ```
-  npm run install-dependencies
+zookeeper-server-start.bat ../../config/zookeeper.properties
 ```
 
-Lanzar server
+2. Lanzar kafka server
 ```
-  npm run server
-```
-
-### Cliente
-
-Lanzar cliente
-```
-  npm run client {name}
+kafka-server-start.bat ../../config/server.properties
 ```
 
-### Cliente angular
-
-Lanzar cliente angular
+3. Crear tópico
 ```
-  npm run start
+kafka-topics.bat --create --topic chat-topic --bootstrap-server localhost:9092 --partitions 3 --replication-factor 3
+```
+
+4. Lanzar server node
+```
+ts-node server
+```
+
+5. Lanzar cliente node con ombre
+```
+ts-node client [name]
 ```
